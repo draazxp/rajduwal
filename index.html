@@ -13,47 +13,57 @@
       color: #0f0;
       padding: 40px;
       white-space: pre;
+      margin: 0;
     }
-    a {
+    nav {
+      display: flex;
+      gap: 2em;
+      background: #000;
+      padding: 1em 2em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #0f0;
+    }
+    nav a {
       color: #10b981;
       text-decoration: none;
-      display: inline-block;
-      margin-right: 1em;
+      font-weight: bold;
     }
-    a:hover {
+    nav a:hover {
       text-decoration: underline;
     }
-    h1 {
-      color: #10b981;
+    h1, h2 {
+      color: #0f0;
+      margin-top: 1em;
     }
     .section-title {
       margin-top: 2em;
       margin-bottom: 0.5em;
       font-weight: bold;
-      color: #0ff;
+      color: #0f0;
     }
   </style>
 </head>
 <body>
 
+<!-- Horizontal Navbar -->
+<nav>
+  <a href="index.html">home</a>
+  <a href="blog.html">blog</a>
+  <a href="whoami.html">whoami</a>
+</nav>
 
-<a href="#blogs">blog</a>
-<a href="#about">whoami</a>
-
-<h2>Hello all! </h2> 
-I am Raj Duwal. Welcome to my home on internet.
-
-
-
-
+<h1>Hi! I'm Raj</h1> 
+Welcome to my home on internet.
 
 <!-- About Me Section -->
-<div id="about" class="section-title">About Me</div>
-I am a DevOps Engineer 
+<h2><div id="about" class="section-title">About Me</div></h2>
+I am a DevOps Engineer passionate about building secure & scalable infrastructure.
 
 <!-- Latest Blogs Section -->
 <div id="blogs" class="section-title">Latest Blogs</div>
-- <a href="https://medium.com/@draazxp/kubernetes-sealed-secrets-secure-your-secrets-without-losing-sleep-964ef18d9984">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</a>
+- <a href="https://medium.com/@draazxp/kubernetes-sealed-secrets-secure-your-secrets-without-losing-sleep-964ef18d9984" target="_blank">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</a>
 
 <!-- Footer -->
 <div class="section-title" style="margin-top:3em;">
