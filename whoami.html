@@ -19,10 +19,9 @@
       flex-direction: column;
     }
 
-    /* Container with side margins */
     .container {
       margin: 0 20%;
-      padding: 0 0 40px; /* no top padding so nav sits flush like whoami */
+      padding: 0 0 40px;
       max-width: 960px;
       box-sizing: border-box;
       flex: 1 1 auto;
@@ -30,7 +29,6 @@
       flex-direction: column;
     }
 
-    /* Horizontal navbar aligned right */
     nav {
       display: flex;
       justify-content: flex-end;
@@ -62,43 +60,28 @@
       transition: transform 220ms ease;
     }
     nav a:hover::after,
-    nav a.active::after {
-      transform: scaleX(1);
-    }
-    /* keep weight consistent to avoid navbar shifting when active */
+    nav a.active::after { transform: scaleX(1); }
     nav a.active { font-weight: 600; }
 
-    /* Tight, consistent spacing */
     h2, p, div.section-title, a {
-        line-height: 1.3;
-      }
-
-      h2 {
-        color: #000;
-        margin: 2.0em 0 0.6em;
-        font-size: 1.6em;
-      }
-      .section-title {
-        display: block;
-        font-weight: 700;
-        color: #000;
-        margin: 2.2em 0 0.8em;
-        letter-spacing: 0.2px;
-      }
-      p { margin: 0 0 1.6em; }
-      a { color: #000; text-decoration: none; display: inline-block; }
-      a:hover { text-decoration: none; }
-
-    /* Blog link indicator */
-    .blog-link {
-      text-decoration: none;
-      border-bottom: 2px solid rgba(0,0,0,0.18);
-      padding-bottom: 2px;
-      transition: border-color 180ms ease;
+      line-height: 1.3;
     }
-    .blog-link:hover { border-bottom-color: rgba(0,0,0,0.6); }
+    h2 {
+      color: #000;
+      margin: 2.0em 0 0.6em;
+      font-size: 1.6em;
+    }
+    .section-title {
+      display: block;
+      font-weight: 700;
+      color: #000;
+      margin: 2.2em 0 0.8em;
+      letter-spacing: 0.2px;
+    }
+    p { margin: 0 0 1.6em; }
+    a { color: #000; text-decoration: none; display: inline-block; }
+    a:hover { text-decoration: none; }
 
-    /* Footer: small and centered, stick to bottom */
     .footer {
       margin-top: auto;
       text-align: center;
@@ -112,62 +95,55 @@
     }
     .social a { margin: 0 8px; color: inherit; display: inline-block; opacity: 0.95 }
     .social svg { width:20px; height:20px; vertical-align:middle; fill:currentColor }
-    /* Responsive Styling */
-  @media screen and (max-width: 1024px) {
-    .container {
-      margin: 0 12%;
-      padding: 20px 0;
-    }
-  }
 
-  @media screen and (max-width: 768px) {
-    .container {
-      margin: 0 8%; /* reduce side margins on tablet/mobile */
-      padding: 16px 0;
+    @media screen and (max-width: 1024px) { .container { margin: 0 12%; padding: 20px 0; } }
+    @media screen and (max-width: 768px) {
+      .container { margin: 0 8%; padding: 16px 0; }
+      nav { flex-direction: column; align-items: flex-start; gap: 1em; }
+      h2 { font-size: 1.5em; }
+      p, a { font-size: 1em; }
     }
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1em;
+    @media screen and (max-width: 480px) {
+      .container { margin: 0 5%; padding: 12px 0; }
+      h2 { font-size: 1.3em; }
+      p, a { font-size: 0.98em; }
     }
-    h2 {
-      font-size: 1.5em;
-    }
-    p, a {
-      font-size: 1em;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .container { margin: 0 5%; padding: 12px 0; }
-    h2 { font-size: 1.3em; }
-    p, a { font-size: 0.98em; }
-  }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <!-- Horizontal Navbar -->
+  <div class="container">
     <nav>
-    <a href="index.html">home</a>
-    <a href="blog.html">blog</a>
-    <a href="whoami.html">whoami</a>
-  </nav>
+      <a href="index.html">home</a>
+      <a href="blog.html">blog</a>
+      <a href="whoami.html">whoami</a>
+    </nav>
 
-  <h2>Hi! I'm Raj</h2> 
-  <p>Welcome to my home on the internet.</p>
+    <h2>About Me</h2>
+    <p>Hey, I’m Raj Duwal. I’m a DevOps engineer from Nepal, and I love building things that just work—whether it’s a smooth cloud infrastructure setup, a DevOps pipeline, a Kubernetes cluster configuration, or an automated system that keeps things running seamlessly.</p>
 
-  <!-- About Me Section -->
-  <h2><div id="about" class="section-title">About Me</div></h2>
-  <p>I am a DevOps/Platform Engineer passionate about building secure & scalable infrastructure.</p>
+    <p>This is my little corner of the internet where I share thoughts on tech, DevOps, cloud, and sometimes a few lessons I’ve picked up along the way. I also like to experiment with side projects, and you can check some of them out on my <a href="https://github.com/draazxp" target="_blank">GitHub</a>.</p>
 
-  <!-- Latest Blogs Section -->
-  <div id="blogs" class="section-title">Latest Blogs</div>
-  <p>- <a class="blog-link" href="https://medium.com/@draazxp/kubernetes-sealed-secrets-secure-your-secrets-without-losing-sleep-964ef18d9984" target="_blank">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</a></p>
+    <p>I enjoy learning, tinkering, and solving problems—and I’m always happy to chat about tech, ideas, or just interesting things in general. If you want to reach out, drop me a line at <a href="mailto:hey@yourdomain.com">hey@yourdomain.com</a>.</p>
 
-  <!-- Footer -->
-  <footer class="footer">&copy; 2026 Raj Duwal. All rights reserved.</footer>
+    <p>Thanks for stopping by—I’m glad you’re here!</p>
+
+    <script>
+      (function () {
+        const links = document.querySelectorAll('nav a');
+        const current = (location.pathname.split('/').pop() || 'index.html');
+        links.forEach(a => {
+          const href = a.getAttribute('href');
+          if (!href) return;
+          if (href.startsWith('#')) return;
+          const linkPage = href.split('/').pop();
+          if (linkPage === current || (current === '' && linkPage === 'index.html')) {
+            a.classList.add('active');
+          }
+        });
+      })();
+    </script>
+
+    <footer class="footer">&copy; 2026 Raj Duwal. All rights reserved.</footer>
     <div class="social">
       <a href="https://linkedin.com/in/draazxp" target="_blank" rel="noopener" aria-label="LinkedIn">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.2 8h4.6V24H.2zM8.6 8h4.4v2.2h.1c.6-1.1 2.2-2.2 4.6-2.2 4.9 0 5.8 3.2 5.8 7.3V24h-4.6v-6.7c0-1.6 0-3.7-2.3-3.7-2.3 0-2.6 1.8-2.6 3.6V24H8.6z"/></svg>
@@ -176,23 +152,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.36-1.3-1.72-1.3-1.72-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.75-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.27 1.19-3.07-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.17a11 11 0 0 1 5.79 0c2.21-1.48 3.18-1.17 3.18-1.17.63 1.58.23 2.75.12 3.04.74.8 1.19 1.82 1.19 3.07 0 4.41-2.7 5.38-5.27 5.66.42.36.8 1.08.8 2.18 0 1.58-.02 2.85-.02 3.24 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12 24 5.65 18.35.5 12 .5z"/></svg>
       </a>
     </div>
-</div>
 
-  <script>
-    (function () {
-      const links = document.querySelectorAll('nav a');
-      const current = (location.pathname.split('/').pop() || 'index.html');
-      links.forEach(a => {
-        const href = a.getAttribute('href');
-        if (!href) return;
-        if (href.startsWith('#')) return; // anchors not treated as separate pages here
-        const linkPage = href.split('/').pop();
-        if (linkPage === current || (current === '' && linkPage === 'index.html')) {
-          a.classList.add('active');
-        }
-      });
-    })();
-  </script>
-
+  </div>
 </body>
 </html>
