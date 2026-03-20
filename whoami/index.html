@@ -40,28 +40,29 @@
     nav a {
       color: #000;
       text-decoration: none;
-      font-weight: 600;
-      position: relative;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
       padding: 6px 6px 8px;
       box-sizing: border-box;
+      position: relative;
+      transition: font-size 200ms ease, opacity 150ms ease;
     }
     nav a::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 6px;
-      height: 3px;
+      bottom: 4px;
+      height: 2px;
       background: #000;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 220ms ease;
     }
-    nav a:hover::after,
-    nav a.active::after { transform: scaleX(1); }
-    nav a.active { font-weight: 600; }
+    nav a:not(.active):hover::after { transform: scaleX(1); }
+    nav a:not(.active):hover { opacity: 0.8; }
+    nav a.active { font-weight: 700; font-size: 1.15em; opacity: 1; }
 
     h2, p, div.section-title, a {
       line-height: 1.3;
@@ -99,7 +100,6 @@
     @media screen and (max-width: 1024px) { .container { margin: 0 12%; padding: 20px 0; } }
     @media screen and (max-width: 768px) {
       .container { margin: 0 8%; padding: 16px 0; }
-      nav { flex-direction: column; align-items: flex-start; gap: 1em; }
       h2 { font-size: 1.5em; }
       p, a { font-size: 1em; }
     }
@@ -130,15 +130,14 @@
     <script>
       (function () {
         const links = document.querySelectorAll('nav a');
-        const current = (location.pathname.split('/').pop() || 'index.html');
+        let current = location.pathname;
+        if (current.length > 1 && current.endsWith('/')) current = current.slice(0, -1);
         links.forEach(a => {
-          const href = a.getAttribute('href');
-          if (!href) return;
-          if (href.startsWith('#')) return;
-          const linkPage = href.split('/').pop();
-          if (linkPage === current || (current === '' && linkPage === 'index.html')) {
-            a.classList.add('active');
-          }
+          let href = a.getAttribute('href');
+          if (!href || href.startsWith('#')) return;
+          if (href.length > 1 && href.endsWith('/')) href = href.slice(0, -1);
+          if (href === '/' && current === '/') a.classList.add('active');
+          else if (href !== '/' && current === href) a.classList.add('active');
         });
       })();
     </script>
