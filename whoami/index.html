@@ -123,7 +123,7 @@
 
     <p>This is my little corner of the internet where I share thoughts on tech, DevOps, cloud, and sometimes a few lessons I’ve picked up along the way. I also like to experiment with side projects, and you can check some of them out on my <a href="https://github.com/draazxp" target="_blank">GitHub</a>.</p>
 
-    <p>I enjoy learning, tinkering, and solving problems—and I’m always happy to chat about tech, ideas, or just interesting things in general. If you want to reach out, drop me a line at <a href="mailto:root@rajduwal.com.np">root@rajduwal.com.np</a>.</p>
+    <p>I enjoy learning, tinkering, and solving problems—and I’m always happy to chat about tech, ideas, or just interesting things in general. If you want to reach out, drop me a line at <a href="mailto:root@rajduwal.com.np">root@rajduwal.com.np</a></p>
 
     <p>Thanks for stopping by—I’m glad you’re here!</p>
 
@@ -132,7 +132,7 @@
         const links = document.querySelectorAll('nav a');
         let current = location.pathname;
         if (current.length > 1 && current.endsWith('/')) current = current.slice(0, -1);
-        links.forEach(a => {
+        links.forEach(a => { 
           let href = a.getAttribute('href');
           if (!href || href.startsWith('#')) return;
           if (href.length > 1 && href.endsWith('/')) href = href.slice(0, -1);
