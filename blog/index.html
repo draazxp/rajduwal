@@ -16,19 +16,23 @@
     nav a.active { font-weight:700; font-size:1.15em; opacity:1; }
     h1 { margin: 2em 0 1em; font-size: 1.6em; }
     .post-list { list-style: none; padding: 0; margin: 0; }
-    .post-item { margin-bottom: 2em; }
+    .post-item { margin-bottom: 1em; }
     .post-item a {
+      display: block;
       color: #000;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05em;
-      border-bottom: 2px solid rgba(0,0,0,0.18);
-      padding-bottom: 2px;
-      transition: border-color 180ms ease;
+      padding: 20px 24px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 6px;
+      transition: border-color 180ms ease, background 180ms ease;
     }
-    .post-item a:hover { border-bottom-color: rgba(0,0,0,0.6); }
-    .post-date { display: block; color: rgba(0,0,0,0.5); font-size: 0.85em; margin-top: 0.3em; }
-    .post-desc { margin-top: 0.4em; color: rgba(0,0,0,0.7); font-size: 0.92em; }
+    .post-item a:hover {
+      border-color: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.02);
+    }
+    .post-title { font-weight: 700; font-size: 1.05em; line-height: 1.4; }
+    .post-date { display: block; color: rgba(0,0,0,0.45); font-size: 0.82em; margin-top: 0.4em; }
+    .post-desc { display: block; margin-top: 0.5em; color: rgba(0,0,0,0.65); font-size: 0.9em; line-height: 1.5; }
     .footer {
       margin-top: auto;
       text-align: center;
@@ -58,14 +62,18 @@
     <h1>Blog</h1>
     <ul class="post-list">
             <li class="post-item">
-        <a href="/blog/gitops-with-argocd">GitOps with ArgoCD: Deploying Kubernetes Apps the Right Way</a>
-        <span class="post-date">2025-03-10</span>
-        <p class="post-desc">How to set up ArgoCD for GitOps-based continuous delivery on Kubernetes.</p>
+        <a href="/blog/gitops-with-argocd">
+          <span class="post-title">GitOps with ArgoCD: Deploying Kubernetes Apps the Right Way</span>
+          <span class="post-date">2025-03-10</span>
+          <span class="post-desc">How to set up ArgoCD for GitOps-based continuous delivery on Kubernetes.</span>
+        </a>
       </li>
       <li class="post-item">
-        <a href="/blog/kubernetes-sealed-secrets">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</a>
-        <span class="post-date">2025-01-15</span>
-        <p class="post-desc">How to encrypt Kubernetes secrets so they&#x27;re safe to commit to Git, using Sealed Secrets.</p>
+        <a href="/blog/kubernetes-sealed-secrets">
+          <span class="post-title">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</span>
+          <span class="post-date">2025-01-15</span>
+          <span class="post-desc">How to encrypt Kubernetes secrets so they&#x27;re safe to commit to Git, using Sealed Secrets.</span>
+        </a>
       </li>
 
     </ul>

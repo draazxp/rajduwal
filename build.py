@@ -429,19 +429,23 @@ def blog_index_template(posts_html):
     nav a.active {{ font-weight:700; font-size:1.15em; opacity:1; }}
     h1 {{ margin: 2em 0 1em; font-size: 1.6em; }}
     .post-list {{ list-style: none; padding: 0; margin: 0; }}
-    .post-item {{ margin-bottom: 2em; }}
+    .post-item {{ margin-bottom: 1em; }}
     .post-item a {{
+      display: block;
       color: #000;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05em;
-      border-bottom: 2px solid rgba(0,0,0,0.18);
-      padding-bottom: 2px;
-      transition: border-color 180ms ease;
+      padding: 20px 24px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 6px;
+      transition: border-color 180ms ease, background 180ms ease;
     }}
-    .post-item a:hover {{ border-bottom-color: rgba(0,0,0,0.6); }}
-    .post-date {{ display: block; color: rgba(0,0,0,0.5); font-size: 0.85em; margin-top: 0.3em; }}
-    .post-desc {{ margin-top: 0.4em; color: rgba(0,0,0,0.7); font-size: 0.92em; }}
+    .post-item a:hover {{
+      border-color: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.02);
+    }}
+    .post-title {{ font-weight: 700; font-size: 1.05em; line-height: 1.4; }}
+    .post-date {{ display: block; color: rgba(0,0,0,0.45); font-size: 0.82em; margin-top: 0.4em; }}
+    .post-desc {{ display: block; margin-top: 0.5em; color: rgba(0,0,0,0.65); font-size: 0.9em; line-height: 1.5; }}
     .footer {{
       margin-top: auto;
       text-align: center;
@@ -552,11 +556,13 @@ def build():
     # Generate blog index
     posts_list_html = ''
     for post in posts:
-        desc_html = f'<p class="post-desc">{html.escape(post["description"])}</p>' if post['description'] else ''
+        desc_html = f'<span class="post-desc">{html.escape(post["description"])}</span>' if post['description'] else ''
         posts_list_html += f'''      <li class="post-item">
-        <a href="/blog/{post['slug']}">{html.escape(post['title'])}</a>
-        <span class="post-date">{post['date']}</span>
-        {desc_html}
+        <a href="/blog/{post['slug']}">
+          <span class="post-title">{html.escape(post['title'])}</span>
+          <span class="post-date">{post['date']}</span>
+          {desc_html}
+        </a>
       </li>\n'''
 
     index_html = blog_index_template(posts_list_html)
