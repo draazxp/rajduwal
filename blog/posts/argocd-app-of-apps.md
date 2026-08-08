@@ -1,7 +1,7 @@
 ---
 title: "ArgoCD App of Apps: The King of Kings of GitOps"
 date: 2026-07-22
-number: 3
+number: 333
 description: "How to manage hundreds of ArgoCD applications without ever running kubectl apply again — using the App of Apps pattern."
 ---
 
@@ -37,6 +37,18 @@ Or you need to roll out a configuration change across every app. Or a new enviro
 You're looking at updating and re-applying hundreds of YAML files manually. One by one. On multiple clusters. Without making a mistake.
 
 That's the problem. The App of Apps is the solution.
+
+Let me give you some real examples of what "hundreds of apps, one change" actually looks like:
+
+**Your manager walks in and says "we're migrating from EKS to GKE"** — old approach: `kubectl get applications -n argocd`, export each one, re-apply them manually on the new GKE cluster, hope you didn't miss one. New approach: find-and-replace `destination.server` across all your YAML files with the new GKE API endpoint, open a PR, merge. ArgoCD points everything at the new cluster. Your manager is happy. You go home on time.
+
+**Disable autosync across all prod apps overnight** — your team decides prod should require manual sync approvals going forward. Without App of Apps, someone is editing Application manifests in the cluster one by one at 11pm. With App of Apps, you open a PR, remove `automated:` from every YAML in `argo-apps-prod/`, merge. Done before the standup.
+
+**Add `prune: true` to all nonprod apps** — the opposite. Nonprod environments are getting polluted with orphaned resources. Add `prune: true` to everything in `argo-apps-nonprod/` in one commit. Clean clusters from now on.
+
+**Update `targetRevision` from `HEAD` to a specific tag across all prod apps** — your team wants prod pinned to `v2.4.1` instead of tracking HEAD. One sed command across the folder, one PR.
+
+These are the changes that used to mean hours of careful, error-prone cluster access. With App of Apps they're a ten-second find-and-replace and a git push.
 
 ## What is App of Apps?
 
