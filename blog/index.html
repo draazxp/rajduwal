@@ -30,6 +30,7 @@
       border-color: rgba(0,0,0,0.4);
       background: rgba(0,0,0,0.02);
     }
+    .post-number { display: block; color: rgba(0,0,0,0.35); font-size: 0.8em; margin-bottom: 0.3em; }
     .post-title { font-weight: 700; font-size: 1.05em; line-height: 1.4; }
     .post-date { display: block; color: rgba(0,0,0,0.45); font-size: 0.82em; margin-top: 0.4em; }
     .post-desc { display: block; margin-top: 0.5em; color: rgba(0,0,0,0.65); font-size: 0.9em; line-height: 1.5; }
@@ -62,7 +63,16 @@
     <h1>Blog</h1>
     <ul class="post-list">
             <li class="post-item">
+        <a href="/blog/argocd-app-of-apps">
+          <span class="post-number">#3</span>
+          <span class="post-title">ArgoCD App of Apps: The King of Kings of GitOps</span>
+          <span class="post-date">2026-07-22</span>
+          <span class="post-desc">How to manage hundreds of ArgoCD applications without ever running kubectl apply again — using the App of Apps pattern.</span>
+        </a>
+      </li>
+      <li class="post-item">
         <a href="/blog/gitops-with-argocd">
+          <span class="post-number">#2</span>
           <span class="post-title">GitOps with ArgoCD: Deploying Kubernetes Apps the Right Way</span>
           <span class="post-date">2025-03-10</span>
           <span class="post-desc">How to set up ArgoCD for GitOps-based continuous delivery on Kubernetes.</span>
@@ -70,6 +80,7 @@
       </li>
       <li class="post-item">
         <a href="/blog/kubernetes-sealed-secrets">
+          <span class="post-number">#1</span>
           <span class="post-title">Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep</span>
           <span class="post-date">2025-01-15</span>
           <span class="post-desc">How to encrypt Kubernetes secrets so they&#x27;re safe to commit to Git, using Sealed Secrets.</span>

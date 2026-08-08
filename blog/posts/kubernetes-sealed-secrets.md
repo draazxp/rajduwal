@@ -1,6 +1,7 @@
 ---
 title: "Kubernetes Sealed Secrets: Secure Your Secrets Without Losing Sleep"
 date: 2025-01-15
+number: 1
 description: "How to encrypt Kubernetes secrets so they're safe to commit to Git, using Sealed Secrets."
 ---
 

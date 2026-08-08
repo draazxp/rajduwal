@@ -187,7 +187,7 @@ def parse_frontmatter(content):
 # HTML templates
 # ---------------------------------------------------------------------------
 
-def post_template(title, date, content_html):
+def post_template(title, date, content_html, number=None):
     """Generate full HTML page for a blog post."""
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -254,6 +254,12 @@ def post_template(title, date, content_html):
 
     .post-header {{
       margin: 2em 0 1em;
+    }}
+    .post-number {{
+      display: block;
+      color: rgba(0,0,0,0.35);
+      font-size: 0.85em;
+      margin-bottom: 0.3em;
     }}
     .post-header h1 {{
       font-size: 1.6em;
@@ -370,6 +376,7 @@ def post_template(title, date, content_html):
 
     <article>
       <div class="post-header">
+        {'<span class="post-number">#' + number + '</span>' if number else ''}
         <h1>{title}</h1>
         <span class="post-date">{date}</span>
       </div>
@@ -443,6 +450,7 @@ def blog_index_template(posts_html):
       border-color: rgba(0,0,0,0.4);
       background: rgba(0,0,0,0.02);
     }}
+    .post-number {{ display: block; color: rgba(0,0,0,0.35); font-size: 0.8em; margin-bottom: 0.3em; }}
     .post-title {{ font-weight: 700; font-size: 1.05em; line-height: 1.4; }}
     .post-date {{ display: block; color: rgba(0,0,0,0.45); font-size: 0.82em; margin-top: 0.4em; }}
     .post-desc {{ display: block; margin-top: 0.5em; color: rgba(0,0,0,0.65); font-size: 0.9em; line-height: 1.5; }}
@@ -537,6 +545,7 @@ def build():
             'title': metadata['title'],
             'date': metadata['date'],
             'description': metadata.get('description', ''),
+            'number': metadata.get('number', ''),
             'slug': slug,
             'html': html_content,
         })
@@ -549,16 +558,18 @@ def build():
         post_dir = output_dir / post['slug']
         post_dir.mkdir(parents=True, exist_ok=True)
 
-        post_html = post_template(post['title'], post['date'], post['html'])
+        post_html = post_template(post['title'], post['date'], post['html'], post.get('number'))
         (post_dir / 'index.html').write_text(post_html, encoding='utf-8')
         print(f"Built: blog/{post['slug']}/index.html")
 
     # Generate blog index
     posts_list_html = ''
     for post in posts:
+        number_html = f'<span class="post-number">#{post["number"]}</span>' if post.get('number') else ''
         desc_html = f'<span class="post-desc">{html.escape(post["description"])}</span>' if post['description'] else ''
         posts_list_html += f'''      <li class="post-item">
         <a href="/blog/{post['slug']}">
+          {number_html}
           <span class="post-title">{html.escape(post['title'])}</span>
           <span class="post-date">{post['date']}</span>
           {desc_html}

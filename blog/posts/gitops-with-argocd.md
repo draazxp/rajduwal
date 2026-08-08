@@ -1,6 +1,7 @@
 ---
 title: "GitOps with ArgoCD: Deploying Kubernetes Apps the Right Way"
 date: 2025-03-10
+number: 2
 description: "How to set up ArgoCD for GitOps-based continuous delivery on Kubernetes."
 ---
 
