@@ -2,7 +2,7 @@
 title: "ArgoCD App of Apps: The King of Kings of GitOps"
 date: 2026-07-22
 number: 333
-description: T"he last piece of the GitOps puzzle: managing ArgoCD Application CRDs through GitOps itself."
+description: The last piece of the GitOps puzzle: managing ArgoCD Application CRDs through GitOps itself."
 ---
 
 You've probably heard the phrase "King of Kings" in movies and series. A ruler so powerful, other rulers bow to them.
