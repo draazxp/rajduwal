@@ -109,10 +109,10 @@ spec:
 ```
 
 > **Important**: Add `secret.yaml` to your `.gitignore` so plain secrets never end up in your repo.
->
-> ```
-> **/secret.yaml
-> ```
+
+```
+**/secret.yaml
+```
 
 ### 4. Deploy the Sealed Secret
 
