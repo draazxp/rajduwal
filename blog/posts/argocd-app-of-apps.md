@@ -219,9 +219,30 @@ Each child app is fully clickable — drill into it, see its own Deployments, Se
 
 This is the most common concern people have. If the `app-of-apps` parent is deleted or ArgoCD restarts — do all the child apps disappear?
 
-No. Child apps are independent Kubernetes resources. The parent creates them, but once they exist in the cluster, they run on their own. Deleting the parent doesn't cascade down and delete the children — it just means no one is watching the folder anymore.
+The answer depends on *how* you delete it, and it's worth understanding clearly before you put this in production.
 
-Your workloads keep running. Your child apps keep syncing. The only thing you lose is the automated management of the Application CRDs themselves — until you re-apply the parent.
+**If ArgoCD restarts** — nothing happens to the child apps. They are independent Kubernetes resources that keep running and syncing on their own. The parent just stops watching the folder until ArgoCD comes back up.
+
+**If you delete the parent using the `argocd` CLI** — it cascades by default:
+
+```bash
+argocd app delete app-of-apps          # cascades — deletes children too
+argocd app delete app-of-apps --cascade=false   # safe — deletes only the parent
+```
+
+**If you delete using `kubectl`** — the behavior depends on whether the finalizer is set on the parent manifest. With no finalizer, `kubectl delete` is a non-cascade delete and children are left untouched. With the finalizer set, it cascades:
+
+```yaml
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  # enables cascade delete on kubectl delete
+```
+
+So if your parent manifest doesn't have that finalizer (which is the common setup), a `kubectl delete` won't touch the children. But `argocd app delete` will cascade unless you explicitly pass `--cascade=false`.
+
+> The official ArgoCD docs note: *"Adding the finalizer enables cascading deletes when implementing the App of Apps pattern."* — meaning it's opt-in, not the default for `kubectl` based deletion.
+
+Bottom line: know which deletion method you're using and what flag you're passing. In an incident, `argocd app delete app-of-apps` without `--cascade=false` will take your child apps down with it.
 
 ## Multi-Cluster From a Single Parent
 
