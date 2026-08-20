@@ -244,6 +244,8 @@ So if your parent manifest doesn't have that finalizer (which is the common setu
 
 Bottom line: know which deletion method you're using and what flag you're passing. In an incident, `argocd app delete app-of-apps` without `--cascade=false` will take your child apps down with it.
 
+> **TL;DR:** Be very careful when deleting the parent app — it can cascade and take all your child applications down with it. Always use `--cascade=false` unless you truly intend to wipe everything.
+
 ## Multi-Cluster From a Single Parent
 
 Here's where it gets really powerful. The parent app lives on one cluster, but each child app can point to a completely different cluster via its `destination.server`:
