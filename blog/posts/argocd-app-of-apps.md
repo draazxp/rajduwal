@@ -217,34 +217,9 @@ Each child app is fully clickable — drill into it, see its own Deployments, Se
 
 ## What Happens if the Parent Goes Down?
 
-This is the most common concern people have. If the `app-of-apps` parent is deleted or ArgoCD restarts — do all the child apps disappear?
+If ArgoCD restarts — nothing happens. The child apps are independent Kubernetes resources that keep running on their own.
 
-The answer depends on *how* you delete it, and it's worth understanding clearly before you put this in production.
-
-**If ArgoCD restarts** — nothing happens to the child apps. They are independent Kubernetes resources that keep running and syncing on their own. The parent just stops watching the folder until ArgoCD comes back up.
-
-**If you delete the parent using the `argocd` CLI** — it cascades by default:
-
-```bash
-argocd app delete app-of-apps          # cascades — deletes children too
-argocd app delete app-of-apps --cascade=false   # safe — deletes only the parent
-```
-
-**If you delete using `kubectl`** — the behavior depends on whether the finalizer is set on the parent manifest. With no finalizer, `kubectl delete` is a non-cascade delete and children are left untouched. With the finalizer set, it cascades:
-
-```yaml
-metadata:
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io  # enables cascade delete on kubectl delete
-```
-
-So if your parent manifest doesn't have that finalizer (which is the common setup), a `kubectl delete` won't touch the children. But `argocd app delete` will cascade unless you explicitly pass `--cascade=false`.
-
-> The official ArgoCD docs note: *"Adding the finalizer enables cascading deletes when implementing the App of Apps pattern."* — meaning it's opt-in, not the default for `kubectl` based deletion.
-
-Bottom line: know which deletion method you're using and what flag you're passing. In an incident, `argocd app delete app-of-apps` without `--cascade=false` will take your child apps down with it.
-
-> **TL;DR:** Be very careful when deleting the parent app — it can cascade and take all your child applications down with it. Always use `--cascade=false` unless you truly intend to wipe everything.
+If the parent is *deleted* — it depends on how you delete it. Some methods cascade (deleting all child apps along with the parent), and some don't. Be very careful here. Understand whether your deletion method cascades before you run it in production. When in doubt, use `--cascade=false` to delete only the parent and leave the children untouched.
 
 ## Multi-Cluster From a Single Parent
 
